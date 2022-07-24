@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<!--让服务器知道这是一个模板而不是一个普通的html，声明模板来源于thymeleaf官网-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>teacher</title>
+</head>
+<body>
+<!--name和age是从model中取的值-->
+  <p th:text="${name}"></p>
+  <p th:text="${age}"></p>
+</body>
+</html>
