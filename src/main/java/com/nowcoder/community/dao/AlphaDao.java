@@ -1,5 +1,5 @@
 package com.nowcoder.community.dao;
 
-public interface BeatDao {
+public interface AlphaDao {
     String select();
 }

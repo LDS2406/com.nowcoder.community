@@ -1,14 +1,17 @@
 package com.nowcoder.community.controller;
 
 import com.nowcoder.community.service.AlphaService;
+import com.nowcoder.community.util.CommunityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
@@ -130,6 +133,46 @@ public class AlphaController {
         list.add(map4);
 
         return list;
+    }
+
+    //cookie示例
+    @RequestMapping(value = "/cookie/set",method = RequestMethod.GET)
+    @ResponseBody
+    public String setCookie(HttpServletResponse response){
+        //创建cookie，必须传入参数，参数必须是字符串，每个cookie对象只能存一对字符串
+        Cookie cookie = new Cookie("code", CommunityUtil.generateUUID());
+        //设置cookie的生效范围，不指定的话可能所有范围都发，就会出现问题
+        cookie.setPath("/community/alpha");
+        //浏览器得到cookie后默认存到内存中，浏览器关了就没有了，一旦设置cookie的生效时间就会存在硬盘里，长期有效，直到超过时间
+        cookie.setMaxAge(60*10);
+        //发送cookie，将cookie放到response的头中
+        response.addCookie(cookie);
+        return "set cookie";
+    }
+
+    @RequestMapping(value = "/cookie/get",method = RequestMethod.GET)
+    @ResponseBody
+    public String getCookie(@CookieValue("code") String code){//通过注解取某一个cookie值
+        return "get cookie";
+    }
+
+    //session示例
+    @RequestMapping(value = "/session/set",method = RequestMethod.GET)
+    @ResponseBody
+    public String setSession(HttpSession session){
+        //springMVC会自动创建session并注入
+        session.setAttribute("id",1);
+        session.setAttribute("name","test");
+        return "set session";
+    }
+
+    @RequestMapping(value = "/session/get",method = RequestMethod.GET)
+    @ResponseBody
+    public String getSession(HttpSession session){
+        //从session中取值
+        System.out.println(session.getAttribute("id"));
+        System.out.println(session.getAttribute("name"));
+        return "get session";
     }
 
 }

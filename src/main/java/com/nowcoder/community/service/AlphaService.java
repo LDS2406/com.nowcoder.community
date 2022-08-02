@@ -1,6 +1,6 @@
 package com.nowcoder.community.service;
 
-import com.nowcoder.community.dao.BeatDao;
+import com.nowcoder.community.dao.AlphaDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ public class AlphaService {
 
     //调用dao,将BeatDao注入给service
     @Autowired
-    private BeatDao beatDao;
+    private AlphaDao alphaDao;
 
     public AlphaService(){
         System.out.println("构造器AlphaService");
@@ -29,6 +29,6 @@ public class AlphaService {
     }
 
     public String find(){
-       return beatDao.select();
+       return alphaDao.select();
     }
 }

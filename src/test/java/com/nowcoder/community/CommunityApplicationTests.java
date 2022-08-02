@@ -1,6 +1,6 @@
 package com.nowcoder.community;
 
-import com.nowcoder.community.dao.BeatDao;
+import com.nowcoder.community.dao.AlphaDao;
 import com.nowcoder.community.service.AlphaService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeansException;
@@ -40,10 +40,10 @@ class CommunityApplicationTests implements ApplicationContextAware {//哪一个�
 
         //用applicationContext这个容器去管理bean
         //从容器中获取自动装配的bean,根据类型获取
-        BeatDao beatDao = applicationContext.getBean(BeatDao.class);
-        System.out.println(beatDao.select());
+        AlphaDao alphaDao = applicationContext.getBean(AlphaDao.class);
+        System.out.println(alphaDao.select());
 
-        BeatDao beta = applicationContext.getBean("beta",BeatDao.class);
+        AlphaDao beta = applicationContext.getBean("beta", AlphaDao.class);
         System.out.println(beta.select());
     }
 
@@ -62,7 +62,7 @@ class CommunityApplicationTests implements ApplicationContextAware {//哪一个�
     //spring容器把BeatDao注入给beatDao这个属性，然后直接使用这个属性
     @Autowired
     @Qualifier("beta")//括号里写bean的名字
-    private BeatDao beatDao;//当前bean依赖的是接口,底层是不直接和接口耦合的，降低耦合度
+    private AlphaDao alphaDao;//当前bean依赖的是接口,底层是不直接和接口耦合的，降低耦合度
 
     @Autowired
     private AlphaService alphaService;
@@ -72,7 +72,7 @@ class CommunityApplicationTests implements ApplicationContextAware {//哪一个�
 
     @Test
     public void testDI(){
-        System.out.println(beatDao);
+        System.out.println(alphaDao);
         System.out.println(alphaService);
         System.out.println(simpleDateFormat);
     }

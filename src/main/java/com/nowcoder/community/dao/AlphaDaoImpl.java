@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 * */
 
 @Repository("beta")
-public class BeatDaoImpl implements BeatDao{
+public class AlphaDaoImpl implements AlphaDao {
     @Override
     public String select() {
         return "Hibernate";
