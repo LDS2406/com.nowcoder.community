@@ -1,6 +1,7 @@
 package com.nowcoder.community.config;
 
 import com.nowcoder.community.controller.interceptor.AlphaInterceptor;
+import com.nowcoder.community.controller.interceptor.LoginRequiredInterceptor;
 import com.nowcoder.community.controller.interceptor.LoginTicketInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Autowired
     private AlphaInterceptor alphaInterceptor;
 
+    @Autowired
+    private LoginRequiredInterceptor loginRequiredInterceptor;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {//利用传入的对象注册interceptor
         registry.addInterceptor(alphaInterceptor)//这么写表示拦截器拦截一切请求
@@ -24,6 +28,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
         //"/**/*.css"项目和域名可以忽略，直接从static这一级开始配
 
         registry.addInterceptor(loginTicketInterceptor)
+                .excludePathPatterns("/**/*.css","/**/*.js","/**/*.png","/**/*.jpg","/**/*.jpeg");
+
+        registry.addInterceptor(loginRequiredInterceptor)
                 .excludePathPatterns("/**/*.css","/**/*.js","/**/*.png","/**/*.jpg","/**/*.jpeg");
     }
 
