@@ -109,7 +109,7 @@ public class SensitiveFilter {
         //结果
         StringBuilder sb = new StringBuilder();
         while (begin < text.length()){//下标是0~n-1
-            char c = text.charAt(begin);
+            char c = text.charAt(position);
             //跳过符号,防止干扰
             if (isSymbol(c)){
                 //若指针1处于根结点，将此符号计入结果不过滤，让指针2向后走一步

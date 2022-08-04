@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX</title>
+</head>
+<body>
+    <p>
+        <!--触发事件是send方法-->
+        <input type="button" value="发送" onclick="send();">
+    </p>
+
+
+<!--引入JQuery-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <!--实现send方法-->
+    <script>
+        function send(){
+            //使用JQuery发送请求
+            $.post(
+                "/community/alpha/ajax",//1.访问路径
+                {"name":"zhansan","age":45},//2.需要向服务器提交的数据，声明一个json对象
+                function (data){//3.声明一个匿名的回调函数
+                    //当服务器对浏览器做出响应后，浏览器得到响应，会调这个方法，会将服务器返回的数据传给data
+                    console.log(typeof(data));
+                    console.log(data);
+
+                    //将字符串转换为js对象，才方便用js去调
+                    data = $.parseJSON(data);
+                    console.log(typeof(data));
+                    console.log(data.code);
+                    console.log(data.msg);
+                }
+            );
+        }
+    </script>
+</body>
+</html>

@@ -15,6 +15,7 @@ public interface DiscussPostMapper {
     //@Param注解用于给参数取别名
     int selectDiscussPostRows(@Param("userId") int userId);//当需要动态拼接条件，且这个方法只有一个参数，参数必须取别名
 
-
+    //增加帖子
+    int insertDiscussPost(DiscussPost discussPost);
 
 }

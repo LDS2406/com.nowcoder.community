@@ -6,6 +6,10 @@
     <sql id="selectFields">
         id, user_id, title, content, type, status, create_time, comment_count, score
     </sql>
+    <sql id="insertFields">
+        user_id, title, content, type, status, create_time, comment_count, score
+    </sql>
+
 <!--    List<DiscussPost> selectDiscussPosts(int userId, int offset, int limit);
 返回的list能够被检测到
 -->
@@ -19,6 +23,7 @@
         order by type desc, create_time desc
         limit #{offset},#{limit}
     </select>
+
 <!--int selectDiscussPostRows(@Param("userId") int userId);-->
     <select id="selectDiscussPostRows" resultType="int">
         select count(id)
@@ -28,5 +33,11 @@
             and user_id = #{userId}
         </if>
     </select>
+
+<!--int insertDiscussPost(DiscussPost discussPost);-->
+    <insert id="insertDiscussPost" parameterType="DiscussPost">
+        insert into discuss_post (<include refid="insertFields"></include>)
+        values (#{userId},#{title},#{content},#{type},#{status},#{createTime},#{commentCount},#{score})
+    </insert>
 
 </mapper>
