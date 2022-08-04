@@ -40,4 +40,9 @@ public class DiscussPostService {
         post.setContent(sensitiveFilter.filter(post.getContent()));
         return discussPostMapper.insertDiscussPost(post);
     }
+
+    //查询帖子详情
+    public DiscussPost findDiscussPostById(int id){
+        return discussPostMapper.selectDiscussPostById(id);
+    }
 }
