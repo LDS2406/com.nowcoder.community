@@ -12,4 +12,7 @@ public interface CommentMapper {
 
     //查询帖子总数来计算总的页数
     int selectCountByEntity(int entityType,int entityId);
+
+    //增加评论
+    int insertComment(Comment comment);
 }
