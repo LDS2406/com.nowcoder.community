@@ -2,9 +2,11 @@ package com.nowcoder.community;
 
 import com.nowcoder.community.dao.DiscussPostMapper;
 import com.nowcoder.community.dao.LoginTicketMapper;
+import com.nowcoder.community.dao.MessageMapper;
 import com.nowcoder.community.dao.UserMapper;
 import com.nowcoder.community.entity.DiscussPost;
 import com.nowcoder.community.entity.LoginTicket;
+import com.nowcoder.community.entity.Message;
 import com.nowcoder.community.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +68,7 @@ public class MapperTest {
 
     @Autowired
     private LoginTicketMapper loginTicketMapper;
+
     @Test
     public void testinsertLoginTicket(){
         LoginTicket loginTicket = new LoginTicket();
@@ -77,6 +80,7 @@ public class MapperTest {
 
 
     }
+
     @Test
     public void testSelect(){
         LoginTicket select = loginTicketMapper.selectByTicket("abc");
@@ -86,5 +90,36 @@ public class MapperTest {
 
         select = loginTicketMapper.selectByTicket("abc");
         System.out.println(select);
+    }
+
+    @Autowired
+    private MessageMapper messageMapper;
+
+    @Test
+    public void testMessageMapper(){
+        //测试会话列表
+        List<Message> messages = messageMapper.selectConversations(111, 0, 20);
+        for (Message message : messages){
+
+            System.out.println(message);
+        }
+
+        //测试会话数量
+        int conversationCount = messageMapper.selectConversationCount(111);
+        System.out.println(conversationCount);
+
+        //查询某个会话的详细私信
+        List<Message> letters = messageMapper.selectLetters("111_112", 0, 10);
+        for (Message letter : letters){
+            System.out.println(letter);
+        }
+
+        //查询某个会话的私信的数量
+        int letterCount = messageMapper.selectLetterCount("111_112");
+        System.out.println(letterCount);
+
+        //查询未读消息的数量
+        int unreadCount = messageMapper.selectLetterUnreadCount(131, "111_131");
+        System.out.println(unreadCount);
     }
 }
