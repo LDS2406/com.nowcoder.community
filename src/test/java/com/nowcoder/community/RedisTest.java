@@ -54,6 +54,7 @@ public class RedisTest {
 
         redisTemplate.opsForSet().add(redisKey,"lll","klkk");
 
+        System.out.println(redisTemplate.opsForSet().size(redisKey));
         System.out.println(redisTemplate.opsForSet().pop(redisKey));
     }
 
