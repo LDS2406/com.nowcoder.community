@@ -31,6 +31,9 @@ public class ServiceLogAspect {
     public void before(JoinPoint joinPoint){//joinPoint表示程序织入的位子
         //记录日志格式：用户【IP地址】，在【时间】，访问了【com.nowcoder.community.service.xxx()】
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if (attributes == null){
+            return;
+        }
         HttpServletRequest request = attributes.getRequest();//获取request对象
         String ip = request.getRemoteHost();//通过request获取用户IP
         String now = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());

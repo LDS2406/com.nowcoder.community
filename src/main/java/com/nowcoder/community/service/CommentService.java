@@ -34,6 +34,11 @@ public class CommentService implements CommunityConstant {
         return commentMapper.selectCountByEntity(entityType,entityId);
     }
 
+    //根据id查询评论
+    public Comment findCommentById(int id){
+        return commentMapper.selectCommentById(id);
+    }
+
 
     //增加评论
     //在这个方法中包括两次DML操作，要保证两次操作在一个事务之内同时成功或者失败，进行事务管理

@@ -1,7 +1,7 @@
-function like(btn, entityType, entityId, entityUserId) {
+function like(btn, entityType, entityId, entityUserId,postId) {
     $.post(
         CONTEXT_PATH + "/like",
-        {"entityType":entityType,"entityId":entityId,"entityUserId":entityUserId},//向服务器提交的数据
+        {"entityType":entityType,"entityId":entityId,"entityUserId":entityUserId,"postId":postId},//向服务器提交的数据
         function (data) {//服务器返回给浏览器的数据
             data = $.parseJSON(data);
             if (data.code == 0){
