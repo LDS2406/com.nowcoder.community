@@ -3,6 +3,8 @@ package com.nowcoder.community;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import javax.annotation.PostConstruct;
+
 @SpringBootApplication
 //这个注解标识的类就表示这是一个配置文件
 

@@ -49,7 +49,7 @@ public class EventConsumer implements CommunityConstant {
 
         if (!event.getData().isEmpty()){
             for (Map.Entry<String,Object> entry : event.getData().entrySet()){//遍历key-value集合,每次得到key-value
-                content.put(entry.getKey(),entry.getValue());
+                content.put(entry.getKey(),entry.getValue());//把event中的map内容放到content中
             }
         }
         message.setContent(JSONObject.toJSONString(content));
