@@ -5,6 +5,15 @@ $(function(){
 function publish() {
 	$("#publishModal").modal("hide");//当点击发布时就将刚才填数据的对话框隐藏
 
+/*
+	//发送AJAX请求之前，将CSRF令牌设置到消息的请求头中
+	var token = $("meta[name='_csrf']").attr(content);
+	var header = $("meta[name='_csrf_header']").attr(content);
+	$(document).ajaxSend(function (e, xhr, options) {//在发送请求之前对整个请求做设置
+		xhr.setRequestHeader(header,token);//通过xhr设置请求头
+	});
+*/
+
 	//获取标题和内容
 	var title = $("#recipient-name").val();//$("#recipient-name")-->id选择器,用id获取
 	var content = $("#message-text").val();
