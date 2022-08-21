@@ -40,6 +40,7 @@ public class DiscussPostController implements CommunityConstant {
     @Autowired
     private EventProducer eventProducer;
 
+    //发布帖子
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody//返回的是字符串不是网页
     public String addDiscussPost(String title,String content){
@@ -157,5 +158,62 @@ public class DiscussPostController implements CommunityConstant {
         model.addAttribute("comments",commentVoList);
 
         return "/site/discuss-detail";
+    }
+
+    //置顶
+    @RequestMapping(value = "/top",method = RequestMethod.POST)
+    @ResponseBody//使用异步请求返回的是字符串不是网页
+    public String setTop(int id){
+        discussPostService.updateType(id,1);
+
+        //帖子信息发送变化，将最新的帖子数据同步到es服务器中,需要重新触发发帖事件
+//触发发帖事件--将新发布的帖子存到es服务器中
+        Event event = new Event()
+                .setTopic(TOPIC_PUBLISH)
+                .setUserId(hostHolder.getUser().getId())//谁触发的事件
+                .setEntityType(ENTITY_TYPE_POST)
+                .setEntityId(id);
+        //触发事件要eventProducer
+        eventProducer.fireEvent(event);
+
+        return CommunityUtil.getJSONString(0);
+    }
+
+    //加精
+    @RequestMapping(value = "/wonderful",method = RequestMethod.POST)
+    @ResponseBody//使用异步请求返回的是字符串不是网页
+    public String setWonderful(int id){
+        discussPostService.updateStatus(id,1);
+
+        //帖子信息发送变化，将最新的帖子数据同步到es服务器中,需要重新触发发帖事件
+//触发发帖事件--将新发布的帖子存到es服务器中
+        Event event = new Event()
+                .setTopic(TOPIC_PUBLISH)
+                .setUserId(hostHolder.getUser().getId())//谁触发的事件
+                .setEntityType(ENTITY_TYPE_POST)
+                .setEntityId(id);
+        //触发事件要eventProducer
+        eventProducer.fireEvent(event);
+
+        return CommunityUtil.getJSONString(0);
+    }
+
+    //删除
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    @ResponseBody//使用异步请求返回的是字符串不是网页
+    public String setDelete(int id){
+        discussPostService.updateStatus(id,2);
+
+        //从es中将帖子删除
+        //触发删帖事件
+        Event event = new Event()
+                .setTopic(TOPIC_DELETE)
+                .setUserId(hostHolder.getUser().getId())//谁触发的事件
+                .setEntityType(ENTITY_TYPE_POST)
+                .setEntityId(id);
+        //触发事件要eventProducer
+        eventProducer.fireEvent(event);
+
+        return CommunityUtil.getJSONString(0);
     }
 }

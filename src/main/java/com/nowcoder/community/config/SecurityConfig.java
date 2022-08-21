@@ -45,6 +45,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
                         "/unfollow"
                 )
                 .hasAnyAuthority(AUTHORITY_USER,AUTHORITY_ADMIN,AUTHORITY_MODERATOR)//这个路径有哪些权限可以访问
+                .antMatchers(
+                        "/discuss/top",
+                        "/discuss/wonderful"
+                )
+                .hasAnyAuthority(
+                        AUTHORITY_MODERATOR
+                )
+                .antMatchers(
+                        "/discuss/delete"
+                )
+                .hasAnyAuthority(
+                        AUTHORITY_ADMIN
+                )
                 .anyRequest().permitAll()//除了这些请求的任何其他请求都允许
                 .and().csrf().disable();//不会向页面生成凭证，禁用csrf
 
