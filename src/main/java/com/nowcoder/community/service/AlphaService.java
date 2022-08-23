@@ -7,7 +7,11 @@ import com.nowcoder.community.entity.DiscussPost;
 import com.nowcoder.community.entity.User;
 import com.nowcoder.community.util.CommunityUtil;
 import org.apache.ibatis.transaction.Transaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
@@ -23,6 +27,8 @@ import java.util.Date;
 
 @Service
 public class AlphaService {
+
+    private static final Logger logger = LoggerFactory.getLogger(AlphaService.class);
 
     //调用dao,将BeatDao注入给service
     @Autowired
@@ -114,4 +120,16 @@ public class AlphaService {
             }
         });
     }
+
+    @Async//让该方法在多线程环境下被异步调用
+    public void execute1(){//启动线程调用这个方法和主线程是同步执行的
+        logger.debug("execute1");
+    }
+
+    //何时执行 执行频率
+    @Scheduled(initialDelay = 10000,fixedRate = 1000)
+    public void execute2(){//会自动调用这个方法
+        logger.debug("execute2");
+    }
+
 }
