@@ -127,9 +127,9 @@ public class AlphaService {
     }
 
     //何时执行 执行频率
-    @Scheduled(initialDelay = 10000,fixedRate = 1000)
+  /*  @Scheduled(initialDelay = 10000,fixedRate = 1000)
     public void execute2(){//会自动调用这个方法
         logger.debug("execute2");
     }
-
+*/
 }

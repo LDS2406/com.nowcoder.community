@@ -10,7 +10,7 @@ import java.util.List;
 public interface DiscussPostMapper {
 
     //动态sql，这个id是0的时候不用拼
-    List<DiscussPost> selectDiscussPosts(int userId, int offset, int limit);//offset是起始行行号
+    List<DiscussPost> selectDiscussPosts(int userId, int offset, int limit, int orderMode);//offset是起始行行号
 
     //@Param注解用于给参数取别名
     int selectDiscussPostRows(@Param("userId") int userId);//当需要动态拼接条件，且这个方法只有一个参数，参数必须取别名
@@ -29,5 +29,8 @@ public interface DiscussPostMapper {
 
     //改帖子状态
     int updateStatus(int id, int status);
+
+    //更新帖子分数
+    long updateScore(int id, double score);
 
 }
