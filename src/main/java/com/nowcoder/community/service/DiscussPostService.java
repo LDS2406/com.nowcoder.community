@@ -139,7 +139,7 @@ public class DiscussPostService {
     }
 
     //更新帖子分数
-    public double updateScore(int id, double score){
+    public int updateScore(int id, double score){
         return discussPostMapper.updateScore(id, score);
     }
 }

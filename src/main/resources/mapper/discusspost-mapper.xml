@@ -67,7 +67,7 @@
         update discuss_post set status = #{status} where id = #{id}
     </update>
 
-<!--long updateScore(int id, double score);-->
+<!--int updateScore(int id, double score);-->
     <update id="updateScore">
         update discuss_post set score = #{score} where id = #{id}
     </update>

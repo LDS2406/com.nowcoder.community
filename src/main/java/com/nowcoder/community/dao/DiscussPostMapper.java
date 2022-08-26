@@ -31,6 +31,6 @@ public interface DiscussPostMapper {
     int updateStatus(int id, int status);
 
     //更新帖子分数
-    long updateScore(int id, double score);
+    int updateScore(int id, double score);
 
 }
