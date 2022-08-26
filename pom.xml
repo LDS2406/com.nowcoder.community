@@ -107,6 +107,12 @@
             <artifactId>qiniu-java-sdk</artifactId>
             <version>7.11.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.github.ben-manes.caffeine/caffeine -->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
